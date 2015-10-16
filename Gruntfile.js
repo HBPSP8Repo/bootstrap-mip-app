@@ -1,4 +1,4 @@
-// Generated on 2015-10-13 using generator-angular 0.12.1
+// Generated on 2015-08-11 using generator-angular 0.11.1
 'use strict';
 
 // # Globbing
@@ -9,15 +9,11 @@
 
 module.exports = function (grunt) {
 
+  // Load grunt tasks automatically
+  require('load-grunt-tasks')(grunt);
+
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
-
-  // Automatically load required Grunt tasks
-  require('jit-grunt')(grunt, {
-    useminPrepare: 'grunt-usemin',
-    ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
-  });
 
   // Configurable paths for the application
   var appConfig = {
@@ -31,11 +27,33 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    protractor_webdriver: {
+        protractor: {
+            options: {
+                path: './node_modules/grunt-protractor-runner/node_modules/protractor/bin/',
+                command: 'webdriver-manager start --standalone'
+            }
+        }
+     },
+
+      protractor: {
+          options: {
+              configFile: "app/tests/e2e/e2e-conf.js",
+              noColor: false
+          },
+          all: {
+          }
+      },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
-        files: ['bower.json'],
-        tasks: ['wiredep']
+        files: ['bower.json']
+        //tasks: ['wiredep']
+      },
+      ngconstant: {
+        files: ['Gruntfile.js'],
+        tasks: ['ngconstant:dev']
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -45,7 +63,7 @@ module.exports = function (grunt) {
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
@@ -70,10 +88,10 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 9002,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35730
       },
       livereload: {
         options: {
@@ -82,8 +100,8 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
+                '/app/bower_components',
+                connect.static('./app/bower_components')
               ),
               connect().use(
                 '/app/styles',
@@ -96,14 +114,14 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: 9011,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
+                '/app/bower_components',
+                connect.static('./app/bower_components')
               ),
               connect.static(appConfig.app)
             ];
@@ -150,7 +168,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      screenshots:'screenshots'
     },
 
     // Add vendor prefixed styles
@@ -160,7 +179,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: true,
+          map: true
         },
         files: [{
           expand: true,
@@ -209,7 +228,7 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
@@ -238,44 +257,14 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
           '<%= yeoman.dist %>/images',
           '<%= yeoman.dist %>/styles'
-        ],
-        patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
-        }
+        ]
       }
     },
-
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
 
     imagemin: {
       dist: {
@@ -305,27 +294,15 @@ module.exports = function (grunt) {
           collapseWhitespace: true,
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
-          removeCommentsFromCDATA: true
+          removeCommentsFromCDATA: true,
+          removeOptionalTags: true
         },
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html'],
+          src: ['*.html', 'views/{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
-      }
-    },
-
-    ngtemplates: {
-      dist: {
-        options: {
-          module: 'bootstrapProjectHbpApp',
-          htmlmin: '<%= htmlmin.dist.options %>',
-          usemin: 'scripts/scripts.js'
-        },
-        cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
       }
     },
 
@@ -341,11 +318,122 @@ module.exports = function (grunt) {
         }]
       }
     },
+    //create angular configuration file
+      ngconstant: {
+          options: {
+              name: 'app.config',
+              dest: 'app/scripts/app/app.config.js',
+              constants: {
+                  backendUrl: 'BACKEND-URL',
+                  backendExportChartUrl: '<%= ngconstant.options.constants.backendUrl %>/exportingChart.php',
+                  dropboxAppkey: 'OPT DROPBOX!!!!'
+              }
+          },
+          test: {
+          },
+          dev: {
+              constants: {
+                  backendUrl: 'http://localhost:8000',
+                  backendExportChartUrl: '<%= ngconstant.dev.constants.backendUrl %>/exportingChart.php',
+                  dropboxAppkey: '7wew0rj0gh2qcik'
+              }
+          },
+          int: {
+              constants: {
+                  backendUrl: 'http://hbps1.chuv.ch/mip/services',
+                  backendExportChartUrl: '<%= ngconstant.int.constants.backendUrl %>/exportingChart.php',
+                  dropboxAppkey: '7wew0rj0gh2qcik'
+              }
+          },
+          demo: {
+              constants: {
+                backendUrl: 'http://chuv-backend.redfroggy.fr',
+                backendExportChartUrl: '<%= ngconstant.demo.constants.backendUrl %>/exportingChart.php',
+                dropboxAppkey: '7wew0rj0gh2qcik'
+              }
+          },
+          prod: {
+              constants: {
+                backendUrl: 'http://hbp-mip.chuv.ch',
+                backendExportChartUrl: '<%= ngconstant.prod.constants.backendUrl %>/exportingChart.php',
+                dropboxAppkey: 'PROD_DROPBOX_APPKEY'
+              }
+          }
+      },
 
     // Replace Google CDN references
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
+      }
+    },
+
+    'string-replace': {
+      inline: {
+        files: {
+          '<%= yeoman.dist %>/': '<%= yeoman.dist %>/index.html'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: "%DropBoxAppKey%",
+              replacement: "<%= ngconstant.options.constants.dropboxAppkey %>"
+            }
+          ]
+        }
+      },
+      dev: {
+        files: {
+          '<%= yeoman.app %>/': '<%= yeoman.app %>/index.html',
+          '<%= yeoman.dist %>/': '<%= yeoman.dist %>/index.html'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: "%DropBoxAppKey%",
+              replacement: "<%= ngconstant.dev.constants.dropboxAppkey %>"
+            }
+          ]
+        }
+      },
+      int: {
+        files: {
+          '<%= yeoman.dist %>/': '<%= yeoman.dist %>/index.html'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: "%DropBoxAppKey%",
+              replacement: "<%= ngconstant.int.constants.dropboxAppkey %>"
+            }
+          ]
+        }
+      },
+      demo: {
+        files: {
+          '<%= yeoman.dist %>/': '<%= yeoman.dist %>/index.html'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: "%DropBoxAppKey%",
+              replacement: "<%= ngconstant.demo.constants.dropboxAppkey %>"
+            }
+          ]
+        }
+      },
+      prod: {
+        files: {
+          '<%= yeoman.dist %>/': '<%= yeoman.dist %>/index.html'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: "%DropBoxAppKey%",
+              replacement: "<%= ngconstant.prod.constants.dropboxAppkey %>"
+            }
+          ]
+        }
       }
     },
 
@@ -361,8 +449,14 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            'scripts/**/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'i18n/{,*/}*.json',
+            'i18n/{,*/}*.js',
+            'font/**',
+            'styles/**/{,*/}*.css',
+            'styles/**/{,*/}*.less',
+            'styles/**/{,*/}*.js'
           ]
         }, {
           expand: true,
@@ -371,7 +465,27 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
+          cwd: 'app/bower_components/bootstrap/dist',
+          src: 'fonts/*',
+          dest: '<%= yeoman.dist %>'
+        },{
+            expand: true,
+            cwd: 'app/bower_components/tinymce-dist',
+            src: '*/**',
+            dest: '<%= yeoman.dist %>/scripts'
+        },{
+            expand: true,
+            cwd: '<%= yeoman.app %>/libs',
+            src: '*/**',
+            dest: '<%= yeoman.dist %>/libs'
+        }, {
+          expand: true,
+          cwd: 'app/bower_components/themify-icons',
+          src: 'fonts/*',
+          dest: '<%= yeoman.dist %>/styles'
+        }, {
+          expand: true,
+          cwd: 'app/bower_components/font-awesome',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]
@@ -383,6 +497,52 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
+    processhtml: {
+      options: {
+          commentMarker: 'prochtml',
+          process: true
+      },
+      dist: {
+          files: {
+              '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+          }
+      }
+    },
+    less: {
+      server: {
+          options: {
+              // strictMath: true,
+              dumpLineNumbers: true,
+              sourceMap: true,
+              sourceMapRootpath: '',
+              outputSourceFiles: true
+          },
+          files: [
+              {
+                  expand: true,
+                  cwd: '<%= yeoman.app %>/styles/less',
+                  src: 'styles.less',
+                  dest: '.tmp/styles/css',
+                  ext: '.css'
+              }
+          ]
+      },
+      dist: {
+          options: {
+              cleancss: true,
+              report: 'min'
+          },
+          files: [
+              {
+                  expand: true,
+                  cwd: '<%= yeoman.app %>/styles/less',
+                  src: 'styles.less',
+                  dest: '.tmp/styles/css',
+                  ext: '.css'
+              }
+          ]
+      }
+  },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
@@ -402,7 +562,7 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true
       }
     }
@@ -416,7 +576,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      'ngconstant:dev',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -431,7 +591,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'wiredep',
+    'ngconstant:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -440,11 +600,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
     'useminPrepare',
     'concurrent:dist',
+    'less:dist',
     'autoprefixer',
-    'ngtemplates',
     'concat',
     'ngAnnotate',
     'copy:dist',
@@ -453,12 +612,32 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
+    'processhtml:dist',
     'htmlmin'
   ]);
+
+    /**
+     * Build by environment (Ex: grunt-build:integration)
+     * Generate a config.js file
+     */
+    grunt.registerTask('build-env',function(env){
+        if(env == null){
+            env  ="dev";
+        }
+        grunt.task.run(['ngconstant:'+env+'','build', 'string-replace:'+env+'']);
+    });
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
     'build'
   ]);
+
+  grunt.registerTask('funcTests', [
+      'clean:screenshots',
+      'protractor_webdriver',
+      'protractor'
+  ]);
+
+  grunt.loadNpmTasks('grunt-string-replace');
 };
