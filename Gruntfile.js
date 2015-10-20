@@ -95,7 +95,9 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          open: false,
+          open: {
+            target: 'http://localhost:9002/#/hbpapps/myapp'
+          },
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
