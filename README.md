@@ -106,7 +106,7 @@ Create your first app :
         </div>
     </div>
     ```
-- Try your first app an adjust it if you want :
+- Try your first app and adjust it if you want :
     ```
     <div class="container-fluid mt">
         <div class=myClass>
