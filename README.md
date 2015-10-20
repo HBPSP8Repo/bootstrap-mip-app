@@ -16,6 +16,10 @@ sudo npm install -g bower
 
 ## Installing and running the environement
 
+Enter the `bootstrap-hbp-app` folder :
+```bash
+cd bootstrap-hbp-app
+```
 Install node dependencies (you may need to be `sudo`) :
 ```bash
 npm install
