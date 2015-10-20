@@ -8,7 +8,7 @@ Here are some depenencies :
 - bower
     
 On ubuntu-like distributions, you can install those dependencies by running :
-```
+```bash
 sudo apt-get install git nodejs npm nodejs-legacy
 ```
 
@@ -31,7 +31,7 @@ Create your first app :
 
 - Add some HTML code in your view `app/scripts/app/myapp/myapp.html` :
 
-    ```
+    ```html
     <div class="container-fluid mt">
         <h1>An example</h1>
         <p>It works ! </p>
@@ -40,7 +40,7 @@ Create your first app :
     __All your code needs to be put into the "container div"__;
 
 - Add some CSS to make it look nicer -> create `app/styles/css/myapp/style.css` for example :
-    ```
+    ```html
     <div class="container-fluid mt">
         <div class=myClass>
             <h1>An example</h1>
@@ -48,7 +48,7 @@ Create your first app :
         </div>
     </div>
     ```
-    ```
+    ```css
     .myClass {
 	    background-color: rgba(100,100,100,0.5);
 	    border-radius: 25px;
@@ -56,11 +56,11 @@ Create your first app :
     }
     ```
     __You need to include your CSS files at the end of the `app/index.html` file :__
-    ```
+    ```html
     <link rel="stylesheet" type="text/css" href="styles/css/myapp/style.css" />
     ```
 - Add some Javascript/JQuery code to make your app dynamic -> create `app/scripts/app/myapp/js/script.js` for example :
-    ```
+    ```html
     <div class="container-fluid mt">
         <div class=myClass>
             <h1>An example</h1>
@@ -69,7 +69,7 @@ Create your first app :
         </div>
     </div>
     ```
-    ```
+    ```javascript
     $(window).load(function() {
 	    $( "#testButton" ).click(function() {
 	        alert( "JS is working ! " );
@@ -77,12 +77,12 @@ Create your first app :
     });
     ```
      __You need to include your JS files at the end of the app/index.html file :__
-    ```
+    ```html
     <script src="scripts/app/myapp/js/script.js"></script>
     ```
     Note that you can add some code in the controler `app/scripts/app/myapp/myapp.controller.js`.
 - Add a logo or some images because we like it -> put your images in the `app/images/myapp/` folder) :
-    ```
+    ```html
     <div class="container-fluid mt">
         <div class=myClass>
             <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
@@ -94,7 +94,7 @@ Create your first app :
     ```
     __You have to name your application's logo `logo.png` !__
 - Add some AngularJS code in your app if you like it:
-    ```
+    ```html
     <div class="container-fluid mt">
         <div class=myClass>
             <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
@@ -107,7 +107,7 @@ Create your first app :
     </div>
     ```
 - Try your first app and adjust it if you want :
-    ```
+    ```html
     <div class="container-fluid mt">
         <div class=myClass>
             <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
@@ -119,7 +119,7 @@ Create your first app :
         </div>
     </div>
     ```
-    ```
+    ```css
     .myClass {
 	    background-color: rgba(100,100,100,0.5);
 	    border-radius: 25px;
@@ -131,14 +131,14 @@ Create your first app :
 	    float: right;
     }
     ```
-    ```
+    ```javascript
     $(window).load(function() {
 	    $( "#testButton" ).click(function() {
 	        alert( "JS is working ! " );
 	    });
     });
     ```
-    ```
+    ```html
     <link rel="stylesheet" type="text/css" href="styles/css/myapp/style.css" />
     <script src="scripts/app/myapp/js/script.js"></script>
     ```
