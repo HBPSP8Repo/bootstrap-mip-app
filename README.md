@@ -10,6 +10,8 @@ Here are some depenencies :
 On ubuntu-like distributions, you can install those dependencies by running :
 ```bash
 sudo apt-get install git nodejs npm nodejs-legacy
+sudo npm install -g grunt-cli
+sudo npm install -g bower
 ```
 
 ## Installing and running the environement
