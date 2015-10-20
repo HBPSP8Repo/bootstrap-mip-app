@@ -16,11 +16,16 @@ sudo npm install -g bower
 
 ## Installing and running the environement
 
-Install things :
-
-- Run "npm install" to retrieve all node dependencies;
-- Run "bower install" to retrieve all bower dependencies;
-
+Install node dependencies (you may need to be `sudo`) :
+    ```bash
+    npm install
+    ```
+    
+Install bower dependencies (you may need to be `sudo`) :
+    ```bash
+    bower install
+    ```
+    
 Run the application :
 
 - Run "grunt serve" to run the local server. (This should open your browser at http://localhost:9002/#/hbpapps/myapp).
