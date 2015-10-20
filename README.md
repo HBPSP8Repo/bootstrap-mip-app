@@ -92,7 +92,6 @@ Create your first app :
     ```html
     <script src="scripts/app/myapp/js/script.js"></script>
     ```
-    Note that you can add some code in the controler `app/scripts/app/myapp/myapp.controller.js`.
 - Add a logo or some images because we like it -> put your images in the `app/images/myapp/` folder) :
     ```html
     <div class="container-fluid mt">
@@ -118,6 +117,7 @@ Create your first app :
         </div>
     </div>
     ```
+    Note that you can add some code in the controler `app/scripts/app/myapp/myapp.controller.js`.
 - Try your first app and adjust it if you want :
     ```html
     <div class="container-fluid mt">
