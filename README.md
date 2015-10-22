@@ -151,7 +151,7 @@ Create your first app :
         }
     }]);
     ```
-- Try your first app and adjust it if you want :
+- Try your first app :
     ```html
     <div class="container-fluid mt">
         <div class=myClass>
@@ -160,9 +160,17 @@ Create your first app :
             <p>If this div background is gray and beautiful, you should be happy !</p>
             <input type="text" ng-model="yourName" placeholder="Enter a name here">
             <p>Hello {{yourName}}! AngularJS is working !</p>
-            <button id="testButton" type="button">Click Me!</button> 
+            <button id="testButton" type="button">Click Me!</button>
+            <button id="resetButton" type="button" ng-click='resetName()'>Reset</button> 
         </div>
     </div>
+    ```
+    ```javascript
+    angular.module('chuvApp.myapp').controller('MyAppController',['$scope', function($scope) {
+        $scope.resetName = function() {
+            $scope.yourName = '';
+        }
+    }]);
     ```
     ```css
     .myClass {
