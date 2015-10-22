@@ -104,7 +104,20 @@ Create your first app :
     </div>
     ```
     __You have to name your application's logo `logo.png` !__
-- Add some AngularJS code in your app if you like it:
+- Let's make it look a bit nicer:
+    ```css
+    .myClass {
+        background-color: rgba(100,100,100,0.5);
+        border-radius: 25px;
+        padding: 20px;
+    }
+    .images {
+        width: 80px;
+        height: 80px;
+        float: right;
+    }
+    ```
+- Add some simple AngularJS code in your app if you like it:
     ```html
     <div class="container-fluid mt">
         <div class=myClass>
@@ -117,7 +130,27 @@ Create your first app :
         </div>
     </div>
     ```
-    Note that you can add some code in the controler `app/scripts/app/myapp/myapp.controller.js`.
+- Let's make some real AngularJS and add some code to your controller `app/scripts/app/myapp/myapp.controller.js`:
+    ```html
+    <div class="container-fluid mt">
+        <div class=myClass>
+            <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
+            <h1>An example</h1>
+            <p>If this div background is gray and beautiful, you should be happy !</p>
+            <input type="text" ng-model="yourName" placeholder="Enter a name here">
+            <p>Hello {{yourName}}! AngularJS is working !</p>
+            <button id="testButton" type="button">Click Me!</button>
+            <button id="resetButton" type="button" ng-click='resetName()'>Reset</button> 
+        </div>
+    </div>
+    ```
+    ```javascript
+    angular.module('chuvApp.myapp').controller('MyAppController',['$scope', function($scope) {
+        $scope.resetName = function() {
+            $scope.yourName = '';
+        }
+    }]);
+    ```
 - Try your first app and adjust it if you want :
     ```html
     <div class="container-fluid mt">
