@@ -78,12 +78,13 @@ Create your first app :
     </div>
     ```
     ```javascript
-    $(window).load(function() {
+    $(document).read(function() {
         $( "#testButton" ).click(function() {
             alert( "JS and JQuery are working ! " );
         });
     });
     ```
+
 
 - Let's add a logo or an image in the `images` folder and use it in our HTML view :
     ```html
@@ -171,7 +172,7 @@ Create your first app :
     }
     ```
     ```javascript
-    $(window).load(function() {
+    $(document).ready(function() {
         $( "#testButton" ).click(function() {
             alert( "JS and JQuery are working ! " );
         });
