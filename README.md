@@ -6,7 +6,7 @@ Here are some depenencies :
 - npm
 - grunt-cli
 - bower
-    
+
 On ubuntu-like distributions, you can install those dependencies by running :
 ```bash
 sudo apt-get install git nodejs npm nodejs-legacy
@@ -20,13 +20,9 @@ Enter the `bootstrap-hbp-app` folder :
 ```bash
 cd bootstrap-hbp-app
 ```
-Install node dependencies (you may need to be `sudo`) :
+Generate your project template by running :
 ```bash
-npm install
-```
-Install bower dependencies (you may need to be `sudo`) :
-```bash
-bower install
+./init.py <Your application name> <Path to your application logo>
 ```
     
 Run the application :
@@ -39,71 +35,69 @@ After each changes you should be able to see your current code running by refres
 
 ## Getting started
 
+Your application folder is `app/scripts/app/<appName>/`. Open it to start working.
+Do not create/edit/delete any file outside of this directory. Also, you should not edit the following files except if you know what you are doing : `index.html` and `<appName>.module.js`.
+Your app can be made of HTML, CSS, Javascript, JQuery and/or AngularJS.
+Feel free to create folders in your working directory, add some data-mock files, and so on.
+
 Create your first app :
 
-- Add some HTML code in your view `app/scripts/app/myapp/myapp.html` :
+- Let's edit our HTML view in `<appName>.html` :
 
     ```html
-    <div class="container-fluid mt">
-        <h1>An example</h1>
-        <p>It works ! </p>
-    </div>
+    <h1>An example</h1>
+    <p>It works ! </p>
     ```
-    __All your code needs to be put into the "container div"__;
 
-- Add some CSS to make it look nicer -> create `app/styles/css/myapp/style.css` for example :
+- Let's add CSS in the `css/style.css` file to make it look nicer :
     ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-        </div>
+    <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
+
+    <div class=myClass>
+        <h1>An example</h1>
+        <p>If this div background is gray and beautiful, you should be happy !</p>
     </div>
     ```
     ```css
     .myClass {
-	    background-color: rgba(100,100,100,0.5);
-	    border-radius: 25px;
-	    padding: 20px;
+        background-color: rgba(100,100,100,0.5);
+        border-radius: 25px;
+        padding: 20px;
     }
     ```
-    __You need to include your CSS files at the end of the `app/index.html` file :__
+
+- Let's add some Javascript/JQuery code in the `js/script.js` file :
     ```html
-    <link rel="stylesheet" type="text/css" href="styles/css/myapp/style.css" />
-    ```
-- Add some Javascript/JQuery code to make your app dynamic -> create `app/scripts/app/myapp/js/script.js` for example :
-    ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-            <button id="testButton" type="button">Click Me!</button> 
-        </div>
+    <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
+    <script src="scripts/app/<appName>/js/script.js"></script>
+
+    <div class=myClass>
+        <h1>An example</h1>
+        <p>If this div background is gray and beautiful, you should be happy !</p>
+        <button id="testButton" type="button">Click Me!</button> 
     </div>
     ```
     ```javascript
     $(window).load(function() {
-	    $( "#testButton" ).click(function() {
-	        alert( "JS is working ! " );
-	    });
+        $( "#testButton" ).click(function() {
+            alert( "JS and JQuery are working ! " );
+        });
     });
     ```
-     __You need to include your JS files at the end of the app/index.html file :__
+
+- Let's add a logo or an image in the `images` folder and use it in our HTML view :
     ```html
-    <script src="scripts/app/myapp/js/script.js"></script>
-    ```
-- Add a logo or some images because we like it -> put your images in the `app/images/myapp/` folder) :
-    ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-            <button id="testButton" type="button">Click Me!</button> 
-        </div>
+    <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
+    <script src="scripts/app/<appName>/js/script.js"></script>
+    
+    <div class=myClass>
+        <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
+        <h1>An example</h1>
+        <p>If this div background is gray and beautiful, you should be happy !</p>
+        <button id="testButton" type="button">Click Me!</button> 
     </div>
     ```
-    __You have to name your application's logo `logo.png` !__
+
 - Let's make it look a bit nicer:
     ```css
     .myClass {
@@ -111,64 +105,56 @@ Create your first app :
         border-radius: 25px;
         padding: 20px;
     }
-    .images {
+    .logo {
         width: 80px;
         height: 80px;
         float: right;
     }
     ```
-- Add some simple AngularJS code in your app if you like it:
+
+- Let's add some AngularJS in our view and let's use our controller `<appName>.controller.js` too :
     ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-            <input type="text" ng-model="yourName" placeholder="Enter a name here">
-            <p>Hello {{yourName}}! AngularJS is working !</p>
-            <button id="testButton" type="button">Click Me!</button> 
-        </div>
-    </div>
-    ```
-- Let's make some real AngularJS and add some code to your controller `app/scripts/app/myapp/myapp.controller.js`:
-    ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-            <input type="text" ng-model="yourName" placeholder="Enter a name here">
-            <p>Hello {{yourName}}! AngularJS is working !</p>
-            <button id="testButton" type="button">Click Me!</button>
-            <button id="resetButton" type="button" ng-click='resetName()'>Reset</button> 
-        </div>
+    <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
+    <script src="scripts/app/<appName>/js/script.js"></script>
+    
+    <div class=myClass ng-controller="<appName>Controller">
+        <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
+        <h1>An example</h1>
+        <p>If this div background is gray and beautiful, you should be happy !</p>
+        <input type="text" ng-model="name" placeholder="Enter a name here">
+        <p>Hello {{name}}! AngularJS is working !</p>
+        <button id="testButton" type="button">Test</button>
+        <button id="resetButton" type="button" ng-click='resetName()'>Reset</button>
     </div>
     ```
     ```javascript
-    angular.module('chuvApp.myapp').controller('MyAppController',['$scope', function($scope) {
+    angular.module('chuvApp.<appName>').controller('<appName>Controller',['$scope',
+      function($scope) {
         $scope.resetName = function() {
-            $scope.yourName = '';
+          $scope.name = ''
         }
     }]);
     ```
-- Try your first app :
+- Let's try our first app :
     ```html
-    <div class="container-fluid mt">
-        <div class=myClass>
-            <img class="images" src="../../images/myapp/logo.png" alt="application logo" />
-            <h1>An example</h1>
-            <p>If this div background is gray and beautiful, you should be happy !</p>
-            <input type="text" ng-model="yourName" placeholder="Enter a name here">
-            <p>Hello {{yourName}}! AngularJS is working !</p>
-            <button id="testButton" type="button">Click Me!</button>
-            <button id="resetButton" type="button" ng-click='resetName()'>Reset</button> 
-        </div>
+    <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
+    <script src="scripts/app/<appName>/js/script.js"></script>
+    
+    <div class=myClass ng-controller="<appName>Controller">
+        <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
+        <h1>An example</h1>
+        <p>If this div background is gray and beautiful, you should be happy !</p>
+        <input type="text" ng-model="name" placeholder="Enter a name here">
+        <p>Hello {{name}}! AngularJS is working !</p>
+        <button id="testButton" type="button">Test</button>
+        <button id="resetButton" type="button" ng-click='resetName()'>Reset</button>
     </div>
     ```
     ```javascript
-    angular.module('chuvApp.myapp').controller('MyAppController',['$scope', function($scope) {
+    angular.module('chuvApp.<appName>').controller('<appName>Controller',['$scope',
+      function($scope) {
         $scope.resetName = function() {
-            $scope.yourName = '';
+          $scope.name = ''
         }
     }]);
     ```
@@ -178,7 +164,7 @@ Create your first app :
 	    border-radius: 25px;
 	    padding: 20px;
     }
-    .images {
+    .logo {
 	    width: 80px;
 	    height: 80px;
 	    float: right;
@@ -186,13 +172,8 @@ Create your first app :
     ```
     ```javascript
     $(window).load(function() {
-	    $( "#testButton" ).click(function() {
-	        alert( "JS is working ! " );
-	    });
+        $( "#testButton" ).click(function() {
+            alert( "JS and JQuery are working ! " );
+        });
     });
-    ```
-    ```html
-    <link rel="stylesheet" type="text/css" href="styles/css/myapp/style.css" />
-    <script src="scripts/app/myapp/js/script.js"></script>
-    ```
-    
+    ```  
