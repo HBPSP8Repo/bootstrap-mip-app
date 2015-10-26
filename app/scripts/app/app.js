@@ -46,7 +46,6 @@ angular
     'chuvApp.header',
     'chuvApp.home',
     'chuvApp.hbpapps',
-    'chuvApp.myapp',
     'chuvApp.articles',
     'chuvApp.users',
     'chuvApp.requests',
