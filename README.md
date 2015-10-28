@@ -190,6 +190,7 @@ Create your first app :
         });
     });
     ```
+
 ## Problems
 
 If the `init.py` script fails installing the node dependencies, have a look at :
