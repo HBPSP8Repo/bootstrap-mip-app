@@ -194,5 +194,5 @@ Create your first app :
 ## Problems
 
 If the `init.py` script fails installing the node dependencies, have a look at :
-https://docs.npmjs.com/getting-started/fixing-npm-permissions
-
+https://docs.npmjs.com/getting-started/fixing-npm-permissions.
+You might have to remove a `tmp` folder that has been created in your home directory before retrying to run the `init.py` script.
