@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse, os, subprocess
+import argparse, os, subprocess, sys
 
 
 def getArgs():
@@ -70,38 +70,63 @@ def replaceContent(fileName, pattern, replacement):
 	except IOError:
 		print 'replaceContent : Cannot read '+fileName+' file ! '
 
+def createDir(dirPath):
+	if os.path.isdir(dirPath):
+		print dirPath + ' already exists'
+	else:
+		if subprocess.call(['mkdir', '-v', dirPath]) != 0:
+			print 'Error : Cannot create '+dirPath+' directory ! '
+			sys.exit(1)
+
 
 def main():
 	# Get arguments
 	args = getArgs()
+	if not os.path.isfile(args.logo):
+		print 'Error : The logo file '+args.logo+' does not exist ! '
+		sys.exit(1)
 
+
+	# Init some constants
 	APP_ID = args.appName.lower()
 	APP_PATH = os.path.join('app/scripts/app/', APP_ID)
 
 	# Install node and bower dependencies
 	print 'Installing node and bower dependencies...'
-	subprocess.call(['sudo', 'npm', 'install'])
-	subprocess.call(['bower', 'install'])
+	ret = 0
+	ret |= subprocess.call(['sudo', 'npm', 'install'])
+	ret |= subprocess.call(['bower', 'install'])
+	if ret != 0:
+		print 'Error : Cannot install node and bower dependencies ! '
+		sys.exit(1)
 
 	# Create application folders
 	print 'Creating the folder hierarchy...'
-	subprocess.call(['mkdir', '-v', APP_PATH])
-	subprocess.call(['mkdir', '-v', os.path.join(APP_PATH, 'css')])
-	subprocess.call(['mkdir', '-v', os.path.join(APP_PATH, 'js')])
-	subprocess.call(['mkdir', '-v', os.path.join(APP_PATH, 'images')])
+	createDir(APP_PATH)
+	createDir(os.path.join(APP_PATH, 'css'))
+	createDir(os.path.join(APP_PATH, 'js'))
+	createDir(os.path.join(APP_PATH, 'images'))
 
 	# Add files
 	print 'Creating some files...'
-	subprocess.call(['touch', os.path.join(APP_PATH, 'index.html')])
-	subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.html')])
-	subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.module.js')])
-	subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.controller.js')])
-	subprocess.call(['touch', os.path.join(APP_PATH, 'css', 'style.css')])
-	subprocess.call(['touch', os.path.join(APP_PATH, 'js', 'script.js')])
+	ret = 0
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, 'index.html')])
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.html')])
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.module.js')])
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, APP_ID+'.controller.js')])
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, 'css', 'style.css')])
+	ret |= subprocess.call(['touch', os.path.join(APP_PATH, 'js', 'script.js')])
+	if ret != 0:
+		print 'Error : Cannot creating some files ! '
+		sys.exit(1)
 
 	# Copy files
 	print 'Copying some files...'
-	subprocess.call(['cp', '-v', args.logo, os.path.join(APP_PATH, 'images', 'logo.png')])
+	ret = 0
+	ret |= subprocess.call(['cp', '-v', args.logo, os.path.join(APP_PATH, 'images', 'logo.png')])
+	if ret != 0:
+		print 'Error : Cannot copy some files ! '
+		sys.exit(1)
 
 	# Set up MVC files
 	print 'Setting up the MVC files...'
