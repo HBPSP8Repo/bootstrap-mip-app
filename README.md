@@ -190,7 +190,7 @@ Create your first app :
         });
     });
     ```
-##Problems
+## Problems
 
 If the `init.py` script fails installing the node dependencies, have a look at :
 https://docs.npmjs.com/getting-started/fixing-npm-permissions
