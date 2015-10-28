@@ -1,5 +1,7 @@
 ## Prerequisites
+
 Here are some depenencies :
+
 - git
 - nodejs
 - nodejs-legacy (not always needed)
@@ -8,6 +10,7 @@ Here are some depenencies :
 - bower
 
 On ubuntu-like distributions, you can install those dependencies by running :
+
 ```bash
 sudo apt-get install git nodejs npm nodejs-legacy
 sudo npm install -g grunt-cli
@@ -17,14 +20,17 @@ sudo npm install -g bower
 ## Installing and running the environement
 
 Enter the `bootstrap-hbp-app` folder :
+
 ```bash
 cd bootstrap-hbp-app
 ```
+
 Generate your project template by running :
+
 ```bash
 ./init.py <Your application name> <Path to your application logo>
 ```
-    
+
 Run the application :
 
 ```bash
@@ -50,6 +56,7 @@ Create your first app :
     ```
 
 - Let's add CSS in the `css/style.css` file to make it look nicer :
+
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
 
@@ -67,6 +74,7 @@ Create your first app :
     ```
 
 - Let's add some Javascript/JQuery code in the `js/script.js` file :
+
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
@@ -87,6 +95,7 @@ Create your first app :
 
 
 - Let's add a logo or an image in the `images` folder and use it in our HTML view :
+
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
@@ -100,6 +109,7 @@ Create your first app :
     ```
 
 - Let's make it look a bit nicer:
+
     ```css
     .myClass {
         background-color: rgba(100,100,100,0.5);
@@ -114,6 +124,7 @@ Create your first app :
     ```
 
 - Let's add some AngularJS in our view and let's use our controller `<appName>.controller.js` too :
+
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
@@ -137,6 +148,7 @@ Create your first app :
     }]);
     ```
 - Let's try our first app :
+
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
@@ -177,4 +189,9 @@ Create your first app :
             alert( "JS and JQuery are working ! " );
         });
     });
-    ```  
+    ```
+##Problems
+
+If the `init.py` script fails installing the node dependencies, have a look at :
+https://docs.npmjs.com/getting-started/fixing-npm-permissions
+
