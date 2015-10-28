@@ -99,7 +99,7 @@ def main():
 	# Install node and bower dependencies
 	print 'Installing node and bower dependencies...'
 	ret = 0
-	ret |= subprocess.call(['sudo', 'npm', 'install'])
+	ret |= subprocess.call(['npm', 'install'])
 	ret |= subprocess.call(['bower', 'install'])
 	if ret != 0:
 		print 'Error : Cannot install node and bower dependencies ! '
