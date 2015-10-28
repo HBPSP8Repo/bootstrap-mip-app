@@ -17,7 +17,8 @@ def writeFile(fileName, content):
 		f.close()
 		print 'Changes applied to '+fileName
 	except IOError:
-		print 'writeFile : Cannot write in '+fileName+' file ! '
+		print 'Error in writeFile : Cannot write in '+fileName+' file ! '
+		sys.exit(1)
 
 def findAndAppend(fileName, pattern, incl):
 	try:
@@ -30,7 +31,8 @@ def findAndAppend(fileName, pattern, incl):
 		f.close()
 		writeFile(fileName, content)
 	except IOError:
-		print 'findAndAppend : Cannot read '+fileName+' file ! '
+		print 'Error in findAndAppend : Cannot read '+fileName+' file ! '
+		sys.exit(1)
 
 
 def findAndPrepend(fileName, pattern, incl):
@@ -44,7 +46,8 @@ def findAndPrepend(fileName, pattern, incl):
 		f.close()
 		writeFile(fileName, content)
 	except IOError:
-		print 'findAndPrepend : Cannot read the file '+fileName+' ! '
+		print 'Error in findAndPrepend : Cannot read the file '+fileName+' ! '
+		sys.exit(1)
 
 
 def fileContains(fileName, pattern):
@@ -57,7 +60,8 @@ def fileContains(fileName, pattern):
 		f.close()
 		return False
 	except IOError:
-		print 'fileContains : Cannot read '+fileName+' file ! '
+		print 'Error in fileContains : Cannot read '+fileName+' file ! '
+		sys.exit(1)
 
 
 def replaceContent(fileName, pattern, replacement):
@@ -68,14 +72,15 @@ def replaceContent(fileName, pattern, replacement):
 		newContent = content.replace(pattern, replacement)
 		writeFile(fileName, newContent)
 	except IOError:
-		print 'replaceContent : Cannot read '+fileName+' file ! '
+		print 'Error in replaceContent : Cannot read '+fileName+' file ! '
+		sys.exit(1)
 
 def createDir(dirPath):
 	if os.path.isdir(dirPath):
 		print dirPath + ' already exists'
 	else:
 		if subprocess.call(['mkdir', '-v', dirPath]) != 0:
-			print 'Error : Cannot create '+dirPath+' directory ! '
+			print 'Error in createDir : Cannot create '+dirPath+' directory ! '
 			sys.exit(1)
 
 
