@@ -1,6 +1,6 @@
 # Bootstrap HBP MIP app
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LREN-CHUV/bootstrap-hbp-app/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LREN-CHUV/bootstrap-mip-app/blob/master/LICENSE)
 
 Code generator for an application that integrates inside the MIP portal.
 
