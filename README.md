@@ -1,6 +1,12 @@
+# Bootstrap HBP MIP app
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LREN-CHUV/bootstrap-hbp-app/blob/master/LICENSE)
+
+Code generator for an application that integrates inside the MIP portal.
+
 ## Prerequisites
 
-Here are some depenencies :
+Here are some dependencies :
 
 - git
 - nodejs
@@ -82,7 +88,7 @@ Create your first app :
     <div class=myClass>
         <h1>An example</h1>
         <p>If this div background is gray and beautiful, you should be happy !</p>
-        <button id="testButton" type="button">Click Me!</button> 
+        <button id="testButton" type="button">Click Me!</button>
     </div>
     ```
     ```javascript
@@ -99,12 +105,12 @@ Create your first app :
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
-    
+
     <div class=myClass>
         <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
         <h1>An example</h1>
         <p>If this div background is gray and beautiful, you should be happy !</p>
-        <button id="testButton" type="button">Click Me!</button> 
+        <button id="testButton" type="button">Click Me!</button>
     </div>
     ```
 
@@ -128,7 +134,7 @@ Create your first app :
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
-    
+
     <div class=myClass ng-controller="<appName>Controller">
         <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
         <h1>An example</h1>
@@ -152,7 +158,7 @@ Create your first app :
     ```html
     <link rel="stylesheet" type="text/css" href="scripts/app/<appName>/css/style.css" />
     <script src="scripts/app/<appName>/js/script.js"></script>
-    
+
     <div class=myClass ng-controller="<appName>Controller">
         <img class="logo" src="scripts/app/<appName>/images/logo.png" alt="application logo"></img>
         <h1>An example</h1>
